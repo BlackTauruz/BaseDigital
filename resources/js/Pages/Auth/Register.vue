@@ -5,9 +5,16 @@ import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import {Head, Link, useForm} from '@inertiajs/vue3';
+import InputSelect from "@/Components/InputSelect.vue";
+
+defineProps<{
+    userTypes: Object
+}>();
 
 const form = useForm({
     name: '',
+    type: '',
+    document: '',
     email: '',
     password: '',
     password_confirmation: '',
@@ -26,7 +33,6 @@ const submit = () => {
 <template>
     <GuestLayout>
         <Head title="Cadastrar-se"/>
-
         <form @submit.prevent="submit">
             <div>
                 <InputLabel for="name" value="Nome"/>
@@ -42,6 +48,36 @@ const submit = () => {
                 />
 
                 <InputError class="mt-2" :message="form.errors.name"/>
+            </div>
+
+            <div class="mt-4">
+                <InputLabel for="type" value="Eu sou"/>
+
+                <InputSelect
+                    id="type"
+                    class="mt-1 block w-full"
+                    :options="userTypes"
+                    v-model="form.type"
+                    required
+                />
+
+                <InputError class="mt-2" :message="form.errors.type"/>
+            </div>
+
+            <div class="mt-4" v-show="form.type">
+                <InputLabel for="document" :value="form.type == 1 ? 'CPF' : 'CNPJ'"/>
+
+                <TextInput
+                    id="document"
+                    type="text"
+                    class="mt-1 block w-full"
+                    v-model="form.document"
+                    v-mask="form.type == 1 ? '###.###.###-##' : '##.###.###/####-##' "
+                    required
+                    autocomplete="document"
+                />
+
+                <InputError class="mt-2" :message="form.errors.document"/>
             </div>
 
             <div class="mt-4">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Actions\User\CreateUser;
+use App\Enums\UserTypes;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\StoreUserRequest;
 use Illuminate\Auth\Events\Registered;
@@ -17,7 +18,9 @@ class RegisteredUserController extends Controller
      */
     public function index(): Response
     {
-        return inertia('Auth/Register');
+        return inertia('Auth/Register', [
+            'userTypes' => UserTypes::labeledArray(),
+        ]);
     }
 
     /**

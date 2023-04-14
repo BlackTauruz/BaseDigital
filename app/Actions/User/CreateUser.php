@@ -15,6 +15,8 @@ class CreateUser extends Action
     {
         $user = (new User);
         $user->name = $data['name'];
+        $user->type = $data['type'];
+        $user->document = $data['document'];
         $user->email = $data['email'];
         $user->password = Hash::make($data['password']);
 

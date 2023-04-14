@@ -163,9 +163,8 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
-        ],
+        'name' => 'O campo :attribute deve conter ao menos um sobrenome.',
+        'document' => 'O campo :attribute deve ser um documento válido.',
     ],
 
     /*
@@ -180,7 +179,9 @@ return [
     */
 
     'attributes' => [
-        'password' => 'senha'
+        'password' => 'senha',
+        'name' => 'nome',
+        'document' => 'documento',
     ],
 
 ];
