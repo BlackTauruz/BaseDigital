@@ -39,7 +39,7 @@ Route::middleware('guest')->group(function () {
          * Password Reset Routes
          */
         Route::controller(NewPasswordController::class)->prefix('reset-password')->group(function () {
-            Route::get('/{token}', 'index')->name('reset.index');
+            Route::get('/{token}', 'index')->name('reset');
             Route::post('/', 'store')->name('reset.store');
         });
     });

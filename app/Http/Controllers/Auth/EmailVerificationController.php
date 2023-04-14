@@ -3,24 +3,31 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Verified;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
+use Inertia\Response;
+use Inertia\ResponseFactory;
 
 class EmailVerificationController extends Controller
 {
-    public function index(Request $request)
+    /**
+     *  Display the email verification view.
+     */
+    public function index(Request $request): RedirectResponse|Response|ResponseFactory
     {
         return $request->user()->hasVerifiedEmail()
-            ? redirect()->intended(RouteServiceProvider::HOME)
-            : Inertia::render('Auth/VerifyEmail', ['status' => session('status')]);
+            ? redirect()->route('dashboard')
+            : inertia('Auth/VerifyEmail', ['status' => session('status')]);
     }
 
-    public function store(Request $request)
+    /**
+     *  Sends an email verification notification.
+     */
+    public function store(Request $request): RedirectResponse
     {
         if ($request->user()->hasVerifiedEmail()) {
-            return redirect()->intended(RouteServiceProvider::HOME);
+            return redirect()->route('dashboard');
         }
 
         $request->user()->sendEmailVerificationNotification();
@@ -28,16 +35,19 @@ class EmailVerificationController extends Controller
         return back()->with('status', 'verification-link-sent');
     }
 
-    public function update(Request $request, $id)
+    /**
+     *  Check the user's email.
+     */
+    public function update(Request $request): RedirectResponse
     {
         if ($request->user()->hasVerifiedEmail()) {
-            return redirect()->intended(RouteServiceProvider::HOME.'?verified=1');
+            return redirect()->route('dashboard', ['verified' => 1]);
         }
 
         if ($request->user()->markEmailAsVerified()) {
             event(new Verified($request->user()));
         }
 
-        return redirect()->intended(RouteServiceProvider::HOME.'?verified=1');
+        return redirect()->route('dashboard', ['verified' => 1]);
     }
 }
