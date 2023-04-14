@@ -3,6 +3,9 @@
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Home\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Models\User;
+use Illuminate\Auth\Notifications\ResetPassword;
+use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,7 +23,7 @@ Route::get('/', HomeController::class)->name('home');
 
 Route::get('/dashboard', DashboardController::class)->middleware(['auth', 'verified'])->name('dashboard');
 
-require __DIR__.'/web/auth.php';
+require __DIR__ . '/web/auth.php';
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
