@@ -13,11 +13,10 @@ class CreateUser extends Action
      */
     public function handle(array $data): User
     {
-        $user = (new User([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]));
+        $user = (new User);
+        $user->name = $data['name'];
+        $user->email = $data['email'];
+        $user->password = Hash::make($data['password']);
 
         $user->save();
 
