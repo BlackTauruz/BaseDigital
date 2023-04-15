@@ -66,7 +66,7 @@ const transfer = () => {
             closeTransferModal()
         },
         onFinish: () => {
-            transferForm.reset()
+            // transferForm.reset()
         },
     });
 }
