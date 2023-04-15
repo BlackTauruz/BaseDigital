@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use Illuminate\Http\Request;
 use Inertia\Response;
 
 class DashboardController
 {
-    public function __invoke(): Response
+    public function __invoke(Request $request): Response
     {
-        return inertia('Dashboard');
+        return inertia('Dashboard', [
+            'transactions' => $request->user()->wallet->transactions,
+        ]);
     }
 }

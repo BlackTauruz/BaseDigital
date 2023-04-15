@@ -21,6 +21,7 @@ Route::get('/', HomeController::class)->name('home');
 Route::get('/dashboard', DashboardController::class)->middleware(['auth', 'verified'])->name('dashboard');
 
 require __DIR__.'/web/auth.php';
+require __DIR__.'/web/wallet.php';
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

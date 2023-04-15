@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import {onMounted, ref} from 'vue';
 
 defineProps<{
-    modelValue?: string;
+    modelValue?: string | number;
 }>();
 
 defineEmits(['update:modelValue']);
@@ -15,7 +15,7 @@ onMounted(() => {
     }
 });
 
-defineExpose({ focus: () => input.value?.focus() });
+defineExpose({focus: () => input.value?.focus()});
 </script>
 
 <template>

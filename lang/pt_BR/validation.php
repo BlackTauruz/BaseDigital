@@ -182,6 +182,7 @@ return [
         'password' => 'senha',
         'name' => 'nome',
         'document' => 'documento',
+        'amount' => 'quantia',
     ],
 
 ];
