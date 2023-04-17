@@ -61,7 +61,7 @@ Route::middleware('auth')->group(function () {
      * Password Confirmation Routes
      */
     Route::controller(ConfirmablePasswordController::class)->prefix('confirm-password')->name('password.')->group(function () {
-        Route::get('/', 'index')->name('confirm.index');
+        Route::get('/', 'show')->name('confirm.index');
         Route::post('/', 'store')->name('confirm.store');
     });
 
