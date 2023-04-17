@@ -1,4 +1,5 @@
 <script setup lang="ts">
+// @ts-ignore
 import {Money3Component} from "v-money3";
 import {defineComponent} from 'vue';
 

@@ -65,14 +65,14 @@ const submit = () => {
             </div>
 
             <div class="mt-4" v-show="form.type">
-                <InputLabel for="document" :value="form.type == 1 ? 'CPF' : 'CNPJ'"/>
+                <InputLabel for="document" :value="form.type == '1' ? 'CPF' : 'CNPJ'"/>
 
                 <TextInput
                     id="document"
                     type="text"
                     class="mt-1 block w-full"
                     v-model="form.document"
-                    v-mask="form.type == 1 ? '###.###.###-##' : '##.###.###/####-##' "
+                    v-mask="form.type == '1' ? '###.###.###-##' : '##.###.###/####-##' "
                     required
                     autocomplete="document"
                 />

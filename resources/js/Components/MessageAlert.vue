@@ -21,6 +21,9 @@ let messageTitle = computed<string>(() => {
         case 'info': {
             return 'Aviso!';
         }
+        default: {
+            return 'Opps';
+        }
     }
 })
 
@@ -38,8 +41,13 @@ let messageColor = computed<string>(() => {
         case 'info': {
             return 'blue';
         }
+        default: {
+            return 'gray';
+        }
     }
 })
+
+
 </script>
 
 <template>
