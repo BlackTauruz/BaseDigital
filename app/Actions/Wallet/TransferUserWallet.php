@@ -26,11 +26,11 @@ class TransferUserWallet extends Action
             throw new WalletException('Não é possível transferir dinheiro para você mesmo!');
         }
 
-        $transaction = $user->wallet->transactions()->create([
-            'from_id' => $toWallet->id,
+        $transaction = $toWallet->transactions()->create([
+            'from_id' => $user->wallet->id,
             'description' => WalletTransactionDescriptions::TRANSFER(),
-            'previous_balance' => $user->wallet->getRawOriginal('balance'),
-            'new_balance' => $user->wallet->getRawOriginal('balance') - $data['amount'],
+            'previous_balance' => $toWallet->getRawOriginal('balance'),
+            'new_balance' => $toWallet->getRawOriginal('balance') + $data['amount'],
             'difference' => $data['amount'],
         ]);
 
@@ -49,6 +49,6 @@ class TransferUserWallet extends Action
     {
         $response = Http::get('https://run.mocky.io/v3/f2fe9a2d-090f-4129-b9bf-70d283c97d5c');
 
-        return $response->failed() || ! $response->object()->messagem == 'autorizado';
+        return $response->failed() || !$response->object()->messagem == 'autorizado';
     }
 }

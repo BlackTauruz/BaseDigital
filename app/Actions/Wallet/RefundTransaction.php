@@ -17,16 +17,16 @@ class RefundTransaction extends Action
             throw new WalletException('Transação já reembolsada!');
         }
 
-        if ($transaction->reference->getRawOriginal('balance') < $transaction->getRawOriginal('difference')) {
+        if ($transaction->wallet->getRawOriginal('balance') < $transaction->getRawOriginal('difference')) {
             throw new WalletException('Saldo insuficiente para reembolsar!');
         }
 
         $transaction->wallet->update([
-            'balance' => $transaction->wallet->getRawOriginal('balance') + $transaction->getRawOriginal('difference'),
+            'balance' => $transaction->wallet->getRawOriginal('balance') - $transaction->getRawOriginal('difference'),
         ]);
 
         $transaction->reference->update([
-            'balance' => $transaction->reference->getRawOriginal('balance') - $transaction->getRawOriginal('difference'),
+            'balance' => $transaction->reference->getRawOriginal('balance') + $transaction->getRawOriginal('difference'),
         ]);
 
         $transaction->update([
