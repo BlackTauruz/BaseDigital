@@ -35,4 +35,10 @@ export type PageProps<T extends Record<string, unknown> = Record<string, unknown
         isUser: boolean;
         isShopkeeper: boolean;
     };
+    message: {
+        success?: string | null;
+        warning?: string | null;
+        danger?: string | null;
+        info?: string | null;
+    }
 };

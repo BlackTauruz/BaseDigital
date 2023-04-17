@@ -3,6 +3,7 @@
 namespace App\Actions\Wallet;
 
 use App\Enums\WalletTransactionDescriptions;
+use App\Exceptions\WalletException;
 use App\Models\User;
 use App\Models\WalletTransaction;
 use Illuminate\Support\Facades\Http;
@@ -10,16 +11,19 @@ use Lorisleiva\Actions\Action;
 
 class TransferUserWallet extends Action
 {
+    /**
+     * @throws WalletException
+     */
     public function handle(User $user, array $data): WalletTransaction
     {
         if ($this->checkAuthorizingService()) {
-            throw new \Exception('A transferência não pode ser realizada agora. Tente novamente mais tarde.');
+            throw new WalletException('A transferência não pode ser realizada agora. Tente novamente mais tarde.');
         }
 
         $toWallet = User::where('document', $data['document'])->first()->wallet;
 
         if ($toWallet->id == $user->wallet->id) {
-            throw new \Exception('Não é possível transferir dinheiro para você mesmo!');
+            throw new WalletException('Não é possível transferir dinheiro para você mesmo!');
         }
 
         $transaction = $user->wallet->transactions()->create([

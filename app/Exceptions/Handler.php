@@ -42,7 +42,22 @@ class Handler extends ExceptionHandler
     public function register(): void
     {
         $this->reportable(function (Throwable $e) {
-            //
         });
+    }
+
+    /**
+     * Prepare exception for rendering.
+     */
+    public function render($request, Throwable $e): \Illuminate\Http\JsonResponse|\Symfony\Component\HttpFoundation\Response
+    {
+        $response = parent::render($request, $e);
+
+        if ($response->status() === 419) {
+            return back()->with([
+                'info' => 'Página expirada, tente novamente.',
+            ]);
+        }
+
+        return $response;
     }
 }

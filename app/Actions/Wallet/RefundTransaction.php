@@ -2,19 +2,23 @@
 
 namespace App\Actions\Wallet;
 
+use App\Exceptions\WalletException;
 use App\Models\WalletTransaction;
 use Lorisleiva\Actions\Action;
 
 class RefundTransaction extends Action
 {
-    public function handle(WalletTransaction $transaction)
+    /**
+     * @throws WalletException
+     */
+    public function handle(WalletTransaction $transaction): void
     {
         if ($transaction->refunded_at != null) {
-            throw new \Exception('Transação já reembolsada!');
+            throw new WalletException('Transação já reembolsada!');
         }
 
         if ($transaction->reference->getRawOriginal('balance') < $transaction->getRawOriginal('difference')) {
-            throw new \Exception('Saldo insuficiente para reembolsar!');
+            throw new WalletException('Saldo insuficiente para reembolsar!');
         }
 
         $transaction->wallet->update([

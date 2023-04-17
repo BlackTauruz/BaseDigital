@@ -18,4 +18,15 @@ module.exports = {
     },
 
     plugins: [require('@tailwindcss/forms')],
+    safelist: [
+        'text-orange-800',
+        'text-orange-400',
+        'bg-orange-300',
+        'text-red-800',
+        'text-red-400',
+        'bg-red-300',
+        'text-blue-800',
+        'text-blue-400',
+        'bg-blue-300',
+    ]
 };

@@ -7,10 +7,20 @@ defineComponent({
 })
 
 const config = {
-    decimal: '.',
-    thousands: ',',
+    masked: false,
+    prefix: '',
+    suffix: '',
+    thousands: '.',
+    decimal: ',',
     precision: 2,
-    disableNegative: true
+    disableNegative: true,
+    disabled: false,
+    min: null,
+    max: null,
+    allowBlank: false,
+    minimumNumberOfCharacters: 0,
+    shouldRound: true,
+    focusOnRight: false,
 }
 
 </script>

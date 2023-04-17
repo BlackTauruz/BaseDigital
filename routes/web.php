@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Home\HomeController;
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,9 +21,4 @@ Route::get('/dashboard', DashboardController::class)->middleware(['auth', 'verif
 
 require __DIR__.'/web/auth.php';
 require __DIR__.'/web/wallet.php';
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+require __DIR__.'/web/profile.php';

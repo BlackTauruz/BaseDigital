@@ -65,8 +65,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/', 'store')->name('confirm.store');
     });
 
-    //TODO: Mover rota
-    //Route::put('password', [PasswordController::class, 'update'])->name('password.update');
+    Route::put('password', [PasswordController::class, 'update'])->name('password.update');
 
     /**
      * Unauthentication Routes
